@@ -12,24 +12,28 @@
   </head>
 
   <body>
-    <div class="container">
-      <header class="header">
-        <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
-          </ul>
-        </nav>
+    <div class="container" role="main">
+      <div class="header">
+        <ol class="breadcrumb text-right">
+          <%= if @current_user do %>
+            <li><%= @current_user.username %></li>
+          <!-- Algo no funciona al generar el código html correspondiente a un link con el método DELETE, por lo que opto por transformarlo en un GET cambiando la ruta en el router.ex para la función delete del Session Controller
+            <li><%= link "Log out", to: session_path(@conn, :delete, @current_user), method: :delete %></li>
+          -->
+            <li><%= button "Log out", to: session_path(@conn, :delete, @current_user), method: :delete %></li>
+          <% else %>
+            <li><%= link "Register", to: user_path(@conn, :new) %></li>
+            <li><%= link "Log in", to: session_path(@conn, :new) %></li>
+          <% end %>
+        </ol>
         <span class="logo"></span>
-      </header>
+      </div>
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
-      <main role="main">
-        <%= render @view_module, @view_template, assigns %>
-      </main>
+      <%= render @view_module, @view_template, assigns %>
 
     </div> <!-- /container -->
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
-  </body>
-</html>
+  </body></html>

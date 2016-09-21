@@ -36,6 +36,7 @@ defmodule Iptrack.Web do
 
       import Iptrack.Router.Helpers
       import Iptrack.Gettext
+      import Iptrack.Auth, only: [authenticate_user: 2] # New import      
     end
   end
 
@@ -58,6 +59,7 @@ defmodule Iptrack.Web do
   def router do
     quote do
       use Phoenix.Router
+      import Iptrack.Auth, only: [authenticate_user: 2] # New import      
     end
   end
 
