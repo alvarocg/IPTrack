@@ -20,7 +20,12 @@ defmodule Iptrack.Router do
     get "/", PageController, :index
     resources "/users", UserController
     resources "/sessions", SessionController, only: [:new, :create, :delete]
-    #get "/sessions/:id", SessionController, :delete
+  end
+
+  scope "/manage", Iptrack do
+    pipe_through [:browser, :authenticate_user] # Use the default browser stack
+
+    resources "/portfolios", PortfolioController
   end
 
   # Other scopes may use custom stacks.
