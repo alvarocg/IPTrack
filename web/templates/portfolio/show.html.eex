@@ -1,0 +1,23 @@
+<h2>Show portfolio</h2>
+
+<ul>
+
+  <li>
+    <strong>User:</strong>
+    <%= @portfolio.user_id %>
+  </li>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @portfolio.name %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @portfolio.description %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: portfolio_path(@conn, :edit, @portfolio) %>
+<%= link "Back", to: portfolio_path(@conn, :index) %>
